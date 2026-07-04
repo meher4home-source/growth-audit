@@ -1,0 +1,1378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#080D1A">
+<meta name="description" content="ClaimRecover finds money your dental insurance underpaid — automatically. You keep 80-85% of everything recovered.">
+<title>ClaimRecover — Dental Insurance Recovery Platform</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+:root{
+  --bg:#080D1A;--bg2:#0D1425;--bg3:#111B30;--bg4:#162035;
+  --b1:rgba(255,255,255,0.06);--b2:rgba(255,255,255,0.10);--b3:rgba(255,255,255,0.16);
+  --white:#FFFFFF;--white2:#C8D4E8;--white3:#7A8FA8;--white4:#3A4A60;
+  --green:#00E87A;--green2:#00C465;--green3:#00A050;
+  --green-bg:rgba(0,232,122,0.08);--green-b:rgba(0,232,122,0.20);--green-b2:rgba(0,232,122,0.40);
+  --red:#FF4757;--red-bg:rgba(255,71,87,0.08);--red-b:rgba(255,71,87,0.25);
+  --yellow:#FFB900;--yellow-bg:rgba(255,185,0,0.08);
+  --mono:'DM Mono',monospace;--sans:'Inter',system-ui,sans-serif;--head:'Space Grotesk',sans-serif;
+  --r:10px;--r-sm:7px;
+}
+html,body{height:100%;scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--bg);color:var(--white);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+
+/* ── NAV ── */
+nav{display:flex;align-items:center;justify-content:space-between;padding:18px 56px;position:sticky;top:0;background:rgba(8,13,26,0.92);backdrop-filter:blur(20px);z-index:200;border-bottom:1px solid var(--b1)}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.nav-logo-mark{width:32px;height:32px;background:var(--green);border-radius:6px;display:flex;align-items:center;justify-content:center}
+.nav-logo-mark svg{width:18px;height:18px}
+.nav-logo-text{font-family:var(--head);font-size:17px;font-weight:700;color:var(--white);letter-spacing:-0.3px}
+.nav-logo-text span{color:var(--green)}
+.nav-r{display:flex;align-items:center;gap:10px}
+.btn-ghost{padding:8px 18px;background:transparent;border:1px solid var(--b2);color:var(--white2);border-radius:var(--r-sm);cursor:pointer;font-size:13px;font-family:var(--sans);transition:all .16s}
+.btn-ghost:hover{border-color:var(--green-b);color:var(--white);background:var(--green-bg)}
+.btn-primary{padding:8px 20px;background:var(--green);color:var(--bg);border:none;border-radius:var(--r-sm);cursor:pointer;font-size:13px;font-weight:600;font-family:var(--sans);transition:all .16s}
+.btn-primary:hover{background:var(--green2);transform:translateY(-1px)}
+
+/* ── HERO ── */
+.hero{min-height:88vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:80px 24px 64px;position:relative;overflow:hidden}
+.hero-grid-bg{position:absolute;inset:0;background-image:linear-gradient(rgba(0,232,122,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,232,122,0.04) 1px,transparent 1px);background-size:48px 48px;pointer-events:none}
+.hero-glow{position:absolute;top:20%;left:50%;transform:translateX(-50%);width:600px;height:400px;background:radial-gradient(ellipse,rgba(0,232,122,0.08) 0%,transparent 70%);pointer-events:none}
+.hero-badge{display:inline-flex;align-items:center;gap:7px;padding:6px 14px;background:var(--green-bg);border:1px solid var(--green-b);border-radius:100px;font-size:12px;font-weight:500;color:var(--green);margin-bottom:28px;font-family:var(--mono)}
+.hero-badge::before{content:'';width:6px;height:6px;background:var(--green);border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}
+.hero h1{font-family:var(--head);font-size:clamp(36px,6vw,72px);font-weight:700;line-height:1.06;letter-spacing:-1.5px;color:var(--white);margin-bottom:20px;max-width:800px}
+.hero h1 .money{color:var(--green);font-family:var(--mono);font-weight:500}
+.hero-sub{font-size:17px;color:var(--white3);line-height:1.65;max-width:500px;margin-bottom:36px}
+.hero-cta{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-bottom:20px}
+.btn-hero{padding:14px 28px;font-size:15px;font-weight:600;border-radius:var(--r);cursor:pointer;font-family:var(--sans);transition:all .2s}
+.btn-hero.p{background:var(--green);color:var(--bg);border:none}
+.btn-hero.p:hover{background:var(--green2);transform:translateY(-2px);box-shadow:0 12px 40px rgba(0,232,122,0.25)}
+.btn-hero.s{background:transparent;border:1px solid var(--b3);color:var(--white2)}
+.btn-hero.s:hover{border-color:var(--green-b);color:var(--white);background:var(--green-bg)}
+.hero-note{font-size:12px;color:var(--white4);font-family:var(--mono)}
+
+/* ── STAT TICKER ── */
+.stat-bar{border-top:1px solid var(--b1);border-bottom:1px solid var(--b1);padding:20px 0;background:var(--bg2);overflow:hidden}
+.stat-track{display:flex;gap:48px;animation:scroll-left 30s linear infinite;white-space:nowrap}
+.stat-track:hover{animation-play-state:paused}
+.stat-item{display:flex;align-items:center;gap:14px;flex-shrink:0;padding:0 24px}
+.stat-num{font-family:var(--mono);font-size:22px;font-weight:500;color:var(--green)}
+.stat-label{font-size:12px;color:var(--white3);max-width:160px;line-height:1.4}
+.stat-div{width:1px;height:28px;background:var(--b2)}
+@keyframes scroll-left{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ── HOW IT WORKS ── */
+.section{padding:88px 56px;max-width:1100px;margin:0 auto;width:100%}
+.sec-label{font-family:var(--mono);font-size:11px;color:var(--green);letter-spacing:2.5px;text-transform:uppercase;margin-bottom:14px}
+.sec-title{font-family:var(--head);font-size:clamp(28px,4vw,46px);font-weight:700;color:var(--white);letter-spacing:-1px;line-height:1.1;margin-bottom:56px}
+.sec-title span{color:var(--green)}
+
+/* Process steps */
+.process-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--b1);border:1px solid var(--b1);border-radius:var(--r);overflow:hidden;position:relative}
+.process-steps::before{content:'';position:absolute;top:48px;left:calc(12.5% + 16px);right:calc(12.5% + 16px);height:1px;background:linear-gradient(90deg,var(--green-b),var(--green-b2),var(--green-b));z-index:1}
+.step{background:var(--bg2);padding:32px 24px;position:relative;transition:background .18s}
+.step:hover{background:var(--bg3)}
+.step-num{font-family:var(--mono);font-size:11px;color:var(--green);margin-bottom:20px;display:block}
+.step-icon{width:40px;height:40px;background:var(--green-bg);border:1px solid var(--green-b);border-radius:8px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;position:relative;z-index:2}
+.step-icon svg{width:18px;height:18px;stroke:var(--green);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.step h3{font-family:var(--head);font-size:15px;font-weight:600;color:var(--white);margin-bottom:8px}
+.step p{font-size:13px;color:var(--white3);line-height:1.6}
+
+/* ── WHAT WE FIND ── */
+.findings-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:8px}
+.finding-card{background:var(--bg2);border:1px solid var(--b1);border-radius:var(--r);padding:28px;transition:all .18s}
+.finding-card:hover{border-color:var(--green-b);background:var(--bg3)}
+.finding-card.hot{border-color:var(--green-b)}
+.finding-icon{font-size:24px;margin-bottom:14px;display:block}
+.finding-card h3{font-family:var(--head);font-size:16px;font-weight:600;color:var(--white);margin-bottom:8px}
+.finding-card p{font-size:13px;color:var(--white3);line-height:1.6}
+.finding-avg{display:inline-block;margin-top:12px;font-family:var(--mono);font-size:12px;color:var(--green);background:var(--green-bg);border:1px solid var(--green-b);padding:3px 10px;border-radius:100px}
+
+/* ── PRICING ── */
+.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:8px}
+.pcard{background:var(--bg2);border:1px solid var(--b1);border-radius:var(--r);padding:32px 26px;position:relative;transition:border-color .2s}
+.pcard:hover{border-color:var(--b2)}
+.pcard.feat{border-color:var(--green-b2);background:var(--bg3)}
+.pc-badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--green);color:var(--bg);font-size:10px;font-weight:700;padding:3px 14px;border-radius:100px;letter-spacing:1px;white-space:nowrap;font-family:var(--mono)}
+.pname{font-family:var(--mono);font-size:10px;color:var(--white3);letter-spacing:2px;text-transform:uppercase;margin-bottom:14px}
+.pprice{font-family:var(--head);font-size:48px;font-weight:700;color:var(--white);line-height:1;margin-bottom:4px;letter-spacing:-2px}
+.pprice sub{font-size:16px;font-weight:400;color:var(--white3);letter-spacing:0;vertical-align:super}
+.pperiod{font-family:var(--mono);font-size:11px;color:var(--white4);margin-bottom:20px}
+.pfeats{list-style:none;margin-bottom:26px;display:flex;flex-direction:column;gap:9px}
+.pfeats li{font-size:13px;color:var(--white2);display:flex;align-items:flex-start;gap:8px;line-height:1.5}
+.pfeats li::before{content:'✓';color:var(--green);font-weight:700;font-size:12px;flex-shrink:0;margin-top:1px}
+.pfeats li.no::before{content:'—';color:var(--white4)}
+.pfeats li.no{color:var(--white4)}
+.pbtn{width:100%;padding:13px;border-radius:var(--r-sm);cursor:pointer;font-size:14px;font-weight:600;font-family:var(--sans);transition:all .18s}
+.pbtn.out{background:transparent;border:1px solid var(--b2);color:var(--white2)}
+.pbtn.out:hover{border-color:var(--green-b);color:var(--white)}
+.pbtn.gr{background:var(--green);color:var(--bg);border:none}
+.pbtn.gr:hover{background:var(--green2)}
+
+/* ── CALCULATOR ── */
+.calc-wrap{background:var(--bg2);border:1px solid var(--green-b);border-radius:var(--r);padding:40px;max-width:680px;margin:0 auto}
+.calc-row{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:28px}
+.calc-field label{display:block;font-family:var(--mono);font-size:11px;color:var(--green);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px}
+.calc-field input[type="range"]{width:100%;accent-color:var(--green);cursor:pointer;margin-bottom:4px}
+.calc-field .val{font-family:var(--mono);font-size:20px;color:var(--white);font-weight:500}
+.calc-result{background:var(--bg3);border:1px solid var(--green-b2);border-radius:var(--r-sm);padding:24px;text-align:center}
+.calc-result-label{font-family:var(--mono);font-size:11px;color:var(--white3);letter-spacing:2px;text-transform:uppercase;margin-bottom:8px}
+.calc-result-num{font-family:var(--head);font-size:48px;font-weight:700;color:var(--green);letter-spacing:-2px;line-height:1}
+.calc-result-sub{font-size:12px;color:var(--white4);margin-top:6px;font-family:var(--mono)}
+
+/* ── SOCIAL PROOF ── */
+.testimonials{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.tcard{background:var(--bg2);border:1px solid var(--b1);border-radius:var(--r);padding:28px;transition:border-color .18s}
+.tcard:hover{border-color:var(--b2)}
+.tcard-quote{font-size:14px;color:var(--white2);line-height:1.7;margin-bottom:18px;font-style:italic}
+.tcard-author{display:flex;align-items:center;gap:10px}
+.tcard-av{width:36px;height:36px;background:var(--green-bg);border:1px solid var(--green-b);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--head);font-weight:700;color:var(--green);font-size:13px;flex-shrink:0}
+.tcard-name{font-size:13px;font-weight:600;color:var(--white)}
+.tcard-role{font-size:11px;color:var(--white3);font-family:var(--mono)}
+.tcard-recovered{display:inline-block;margin-top:12px;font-family:var(--mono);font-size:11px;color:var(--green);background:var(--green-bg);border:1px solid var(--green-b);padding:3px 10px;border-radius:100px}
+
+/* ── FAQ ── */
+.faq-list{display:flex;flex-direction:column;gap:1px;background:var(--b1);border:1px solid var(--b1);border-radius:var(--r);overflow:hidden}
+.faq-item{background:var(--bg2);padding:20px 24px;cursor:pointer;transition:background .15s}
+.faq-item:hover{background:var(--bg3)}
+.faq-q{display:flex;align-items:center;justify-content:space-between;gap:16px}
+.faq-q span{font-size:14px;font-weight:500;color:var(--white)}
+.faq-q .arrow{font-size:18px;color:var(--green);transition:transform .2s;flex-shrink:0}
+.faq-a{font-size:13px;color:var(--white3);line-height:1.7;margin-top:12px;display:none}
+.faq-item.open .faq-a{display:block}
+.faq-item.open .arrow{transform:rotate(45deg)}
+
+/* ── FOOTER ── */
+footer{padding:36px 56px;border-top:1px solid var(--b1);display:flex;flex-direction:column;align-items:center;gap:10px}
+.footer-links{display:flex;gap:20px}
+.footer-links a{font-size:12px;color:var(--white4);text-decoration:none;font-family:var(--mono);transition:color .15s}
+.footer-links a:hover{color:var(--green)}
+footer p{font-size:11px;color:var(--white4);text-align:center;font-family:var(--mono)}
+
+/* ── APP ── */
+#app{display:none;height:100vh;height:100dvh;flex-direction:column;overflow:hidden}
+.app-nav{height:54px;display:flex;align-items:center;justify-content:space-between;padding:0 20px;border-bottom:1px solid var(--b1);background:var(--bg);flex-shrink:0}
+.app-nav-logo{display:flex;align-items:center;gap:8px;text-decoration:none;cursor:pointer}
+.app-nav-mark{width:26px;height:26px;background:var(--green);border-radius:5px;display:flex;align-items:center;justify-content:center}
+.app-nav-mark svg{width:14px;height:14px}
+.app-nav-name{font-family:var(--head);font-size:15px;font-weight:700;color:var(--white)}
+.app-nav-name span{color:var(--green)}
+.app-nav-r{display:flex;align-items:center;gap:8px}
+.user-tag{font-family:var(--mono);font-size:11px;color:var(--white2);padding:3px 9px;background:var(--bg3);border:1px solid var(--b2);border-radius:100px}
+.plan-tag{font-family:var(--mono);font-size:9px;font-weight:700;color:var(--green);padding:3px 8px;background:var(--green-bg);border:1px solid var(--green-b);border-radius:100px;letter-spacing:.8px}
+.app-signout{padding:5px 12px;background:transparent;border:1px solid var(--b1);color:var(--white3);border-radius:var(--r-sm);cursor:pointer;font-size:11px;font-family:var(--sans);transition:all .15s}
+.app-signout:hover{border-color:var(--b2);color:var(--white2)}
+
+/* ── APP BODY ── */
+.app-body{display:flex;flex:1;overflow:hidden}
+
+/* SIDEBAR */
+.sidebar{width:240px;background:var(--bg2);border-right:1px solid var(--b1);display:flex;flex-direction:column;flex-shrink:0;overflow:hidden}
+.sb-section{padding:12px 10px}
+.sb-label{font-family:var(--mono);font-size:9px;color:var(--white4);letter-spacing:2.5px;text-transform:uppercase;padding:10px 10px 5px}
+.sb-btn{display:flex;align-items:center;gap:9px;width:100%;padding:9px 12px;background:transparent;border:1px solid transparent;border-radius:var(--r-sm);cursor:pointer;font-size:13px;color:var(--white3);text-align:left;font-family:var(--sans);transition:all .14s}
+.sb-btn:hover{background:var(--bg3);color:var(--white)}
+.sb-btn.act{background:var(--green-bg);color:var(--green);border-color:var(--green-b)}
+.sb-btn svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+.sb-div{height:1px;background:var(--b1);margin:6px 10px}
+.sb-upgrade-box{margin:12px 10px;padding:14px;background:var(--green-bg);border:1px solid var(--green-b);border-radius:var(--r-sm)}
+.sb-upgrade-box p{font-size:12px;color:var(--white2);line-height:1.5;margin-bottom:10px}
+.sb-upgrade-btn{width:100%;padding:8px;background:var(--green);color:var(--bg);border:none;border-radius:6px;font-size:12px;font-weight:700;cursor:pointer;font-family:var(--sans);transition:background .15s}
+.sb-upgrade-btn:hover{background:var(--green2)}
+
+/* MOBILE SIDEBAR */
+.hamburger{display:none;width:36px;height:36px;align-items:center;justify-content:center;background:transparent;border:1px solid var(--b2);border-radius:7px;cursor:pointer;color:var(--white3);flex-shrink:0}
+.hamburger svg{width:17px;height:17px}
+.sb-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:299}
+.sb-overlay.show{display:block}
+
+/* MAIN AREA */
+.main-area{flex:1;overflow-y:auto;padding:28px;-webkit-overflow-scrolling:touch}
+.main-area::-webkit-scrollbar{width:4px}
+.main-area::-webkit-scrollbar-thumb{background:var(--b2);border-radius:2px}
+
+/* DASHBOARD */
+.page-title{font-family:var(--head);font-size:22px;font-weight:700;color:var(--white);margin-bottom:6px;letter-spacing:-0.5px}
+.page-sub{font-size:13px;color:var(--white3);margin-bottom:24px}
+
+.metric-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:24px}
+.metric-card{background:var(--bg2);border:1px solid var(--b1);border-radius:var(--r);padding:20px}
+.metric-label{font-family:var(--mono);font-size:10px;color:var(--white3);letter-spacing:2px;text-transform:uppercase;margin-bottom:8px}
+.metric-val{font-family:var(--head);font-size:28px;font-weight:700;color:var(--white);letter-spacing:-1px;line-height:1}
+.metric-val.green{color:var(--green)}
+.metric-val.red{color:var(--red)}
+.metric-change{font-family:var(--mono);font-size:11px;margin-top:4px}
+.metric-change.up{color:var(--green)}
+.metric-change.dn{color:var(--red)}
+
+/* CLAIMS TABLE */
+.table-wrap{background:var(--bg2);border:1px solid var(--b1);border-radius:var(--r);overflow:hidden}
+.table-header{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid var(--b1)}
+.table-title{font-family:var(--head);font-size:14px;font-weight:600;color:var(--white)}
+.table-actions{display:flex;gap:8px}
+.tbl-btn{padding:7px 14px;border:1px solid var(--b2);background:transparent;color:var(--white2);border-radius:6px;cursor:pointer;font-size:12px;font-family:var(--sans);transition:all .15s}
+.tbl-btn:hover{border-color:var(--green-b);color:var(--white);background:var(--green-bg)}
+.tbl-btn.primary{background:var(--green);color:var(--bg);border:none}
+.tbl-btn.primary:hover{background:var(--green2)}
+.table-scroll{overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:700px}
+th{padding:11px 16px;text-align:left;font-family:var(--mono);font-size:10px;color:var(--white4);letter-spacing:1.5px;text-transform:uppercase;border-bottom:1px solid var(--b1)}
+td{padding:13px 16px;font-size:13px;color:var(--white2);border-bottom:1px solid var(--b1)}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:var(--bg3)}
+.status-badge{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:100px;font-size:11px;font-family:var(--mono);font-weight:500}
+.status-badge.flagged{background:var(--yellow-bg);color:var(--yellow);border:1px solid rgba(255,185,0,0.25)}
+.status-badge.recovered{background:var(--green-bg);color:var(--green);border:1px solid var(--green-b)}
+.status-badge.denied{background:var(--red-bg);color:var(--red);border:1px solid var(--red-b)}
+.status-badge.submitted{background:rgba(100,130,255,0.08);color:#8899ff;border:1px solid rgba(100,130,255,0.25)}
+.status-badge.reviewing{background:var(--b1);color:var(--white3);border:1px solid var(--b2)}
+.amount-pos{color:var(--green);font-family:var(--mono)}
+.amount-neg{color:var(--red);font-family:var(--mono)}
+
+/* UPLOAD ZONE */
+.upload-zone{border:2px dashed var(--green-b);border-radius:var(--r);padding:48px;text-align:center;transition:all .2s;cursor:pointer;background:var(--green-bg)}
+.upload-zone:hover{border-color:var(--green-b2);background:rgba(0,232,122,0.12)}
+.upload-zone.dragging{border-color:var(--green);background:rgba(0,232,122,0.15)}
+.upload-icon{width:48px;height:48px;background:var(--bg3);border:1px solid var(--green-b);border-radius:12px;display:flex;align-items:center;justify-content:center;margin:0 auto 16px}
+.upload-icon svg{width:22px;height:22px;stroke:var(--green);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.upload-title{font-family:var(--head);font-size:16px;font-weight:600;color:var(--white);margin-bottom:6px}
+.upload-sub{font-size:13px;color:var(--white3)}
+#fileInput{display:none}
+
+/* APPEAL MODAL */
+.appeal-modal-content{max-width:620px}
+.appeal-letter{background:var(--bg3);border:1px solid var(--b2);border-radius:var(--r-sm);padding:20px;font-size:13px;color:var(--white2);line-height:1.8;white-space:pre-wrap;font-family:var(--mono);max-height:320px;overflow-y:auto;margin-bottom:16px}
+.appeal-letter::-webkit-scrollbar{width:4px}
+.appeal-letter::-webkit-scrollbar-thumb{background:var(--b2)}
+.stream-cursor{display:inline-block;color:var(--green);animation:blink .7s infinite}
+@keyframes blink{0%,49%{opacity:1}50%,100%{opacity:0}}
+
+/* MODAL */
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);backdrop-filter:blur(8px);z-index:1000;align-items:center;justify-content:center;padding:16px}
+.overlay.open{display:flex}
+.modal{background:var(--bg2);border:1px solid var(--b2);border-radius:14px;padding:32px;width:100%;max-width:440px;position:relative;max-height:92vh;overflow-y:auto}
+.modal.wide{max-width:640px}
+.modal::-webkit-scrollbar{width:3px}
+.modal::-webkit-scrollbar-thumb{background:var(--b2)}
+.m-close{position:absolute;top:14px;right:16px;background:transparent;border:none;color:var(--white3);font-size:18px;cursor:pointer;padding:4px;line-height:1}
+.m-close:hover{color:var(--white2)}
+.m-title{font-family:var(--head);font-size:20px;font-weight:700;color:var(--white);margin-bottom:5px;letter-spacing:-0.3px}
+.m-sub{font-size:13px;color:var(--white3);margin-bottom:20px;line-height:1.5}
+.err-box{background:var(--red-bg);border:1px solid var(--red-b);color:#ff8a94;padding:9px 13px;border-radius:var(--r-sm);font-size:12.5px;margin-bottom:12px;display:none}
+.ok-box{background:var(--green-bg);border:1px solid var(--green-b);color:var(--green);padding:9px 13px;border-radius:var(--r-sm);font-size:12.5px;margin-bottom:12px;display:none}
+.field{margin-bottom:12px}
+.field label{display:block;font-family:var(--mono);font-size:11px;color:var(--white3);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px}
+.field input,.field select,.field textarea{width:100%;padding:10px 13px;background:var(--bg3);border:1px solid var(--b2);border-radius:var(--r-sm);color:var(--white);font-size:14px;font-family:var(--sans);outline:none;transition:border-color .16s}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--green-b)}
+.field input::placeholder,.field textarea::placeholder{color:var(--white4)}
+.field select{cursor:pointer}
+.field select option{background:var(--bg3)}
+.field textarea{resize:vertical;min-height:80px;line-height:1.5}
+.pw-wrap{position:relative}
+.pw-wrap input{padding-right:52px}
+.pw-eye{position:absolute;right:10px;top:50%;transform:translateY(-50%);background:transparent;border:none;cursor:pointer;color:var(--white3);font-size:12px;font-family:var(--sans);transition:color .13s}
+.pw-eye:hover{color:var(--white2)}
+.m-btn{width:100%;padding:12px;background:var(--green);color:var(--bg);border:none;border-radius:var(--r-sm);font-size:14px;font-weight:700;cursor:pointer;font-family:var(--sans);margin-top:6px;transition:all .16s;letter-spacing:.2px}
+.m-btn:hover{background:var(--green2)}
+.m-btn:disabled{opacity:.5;cursor:not-allowed}
+.m-btn.out{background:transparent;border:1px solid var(--b2);color:var(--white2)}
+.m-btn.out:hover{border-color:var(--green-b);color:var(--white)}
+.m-sw{text-align:center;margin-top:14px;font-size:12.5px;color:var(--white3)}
+.m-sw a{color:var(--green);cursor:pointer;font-weight:500}
+.btn-row{display:flex;gap:10px;margin-top:6px}
+.btn-row .m-btn{margin-top:0}
+
+/* FORM TOGGLE */
+.form-toggle{display:flex;background:var(--bg3);border-radius:var(--r-sm);padding:3px;margin-bottom:18px;gap:3px}
+.ft-btn{flex:1;padding:8px;background:transparent;border:none;border-radius:6px;font-size:13px;font-weight:500;color:var(--white3);cursor:pointer;font-family:var(--sans);transition:all .16s}
+.ft-btn.act{background:var(--green);color:var(--bg)}
+
+/* ANIMATIONS */
+.fade-in{animation:fi .25s ease}
+@keyframes fi{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  nav,footer{padding:14px 18px}
+  .section{padding:56px 18px}
+  .stat-bar{padding:16px 0}
+  .process-steps,.findings-grid,.pricing-grid,.testimonials,.metric-grid{grid-template-columns:1fr}
+  .process-steps::before{display:none}
+  .calc-row{grid-template-columns:1fr}
+  .hamburger{display:flex}
+  .sidebar{position:fixed;top:54px;bottom:0;left:0;width:260px;max-width:82vw;transform:translateX(-100%);transition:transform .25s ease;z-index:300;box-shadow:8px 0 32px rgba(0,0,0,.5)}
+  .sidebar.open{transform:translateX(0)}
+  .main-area{padding:16px}
+  .metric-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:480px){
+  .metric-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════ LANDING ═══════════ -->
+<div id="landing">
+<nav>
+  <a class="nav-logo" href="#">
+    <div class="nav-logo-mark"><svg viewBox="0 0 24 24" fill="none" stroke="#080D1A" stroke-width="2.5" stroke-linecap="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
+    <span class="nav-logo-text">Claim<span>Recover</span></span>
+  </a>
+  <div class="nav-r">
+    <button class="btn-ghost" onclick="openModal('login')">Sign in</button>
+    <button class="btn-primary" onclick="openModal('signup')">Get free audit</button>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-grid-bg"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-badge">Insurance Recovery Automation</div>
+  <h1>Your practice is owed<br><span class="money">$4,200</span> — this month.</h1>
+  <p class="hero-sub">We scan every remittance against your contracted rates, flag every underpayment and denial, then draft the appeal letters. You keep 82% of everything recovered.</p>
+  <div class="hero-cta">
+    <button class="btn-hero p" onclick="openModal('signup')">Run free claims audit</button>
+    <button class="btn-hero s" onclick="document.getElementById('how').scrollIntoView({behavior:'smooth'})">See how it works</button>
+  </div>
+  <p class="hero-note">No credit card &bull; HIPAA-compliant &bull; Works with Dentrix, Eaglesoft, Open Dental</p>
+</section>
+
+<!-- STAT TICKER -->
+<div class="stat-bar">
+  <div class="stat-track">
+    <div class="stat-item"><span class="stat-num">$4,200</span><span class="stat-label">Average monthly underpayment per solo practice</span></div>
+    <div class="stat-div"></div>
+    <div class="stat-item"><span class="stat-num">82%</span><span class="stat-label">You keep of every dollar recovered</span></div>
+    <div class="stat-div"></div>
+    <div class="stat-item"><span class="stat-num">48hr</span><span class="stat-label">From CSV upload to flagged claims list</span></div>
+    <div class="stat-div"></div>
+    <div class="stat-item"><span class="stat-num">5–10%</span><span class="stat-label">Monthly revenue lost to underpayments — silently</span></div>
+    <div class="stat-div"></div>
+    <div class="stat-item"><span class="stat-num">$0</span><span class="stat-label">Upfront cost — we only earn when you recover</span></div>
+    <div class="stat-div"></div>
+    <div class="stat-item"><span class="stat-num">CDT</span><span class="stat-label">All procedure codes analyzed automatically</span></div>
+    <!-- Repeat for infinite scroll -->
+    <div class="stat-div"></div>
+    <div class="stat-item"><span class="stat-num">$4,200</span><span class="stat-label">Average monthly underpayment per solo practice</span></div>
+    <div class="stat-div"></div>
+    <div class="stat-item"><span class="stat-num">82%</span><span class="stat-label">You keep of every dollar recovered</span></div>
+    <div class="stat-div"></div>
+    <div class="stat-item"><span class="stat-num">48hr</span><span class="stat-label">From CSV upload to flagged claims list</span></div>
+    <div class="stat-div"></div>
+    <div class="stat-item"><span class="stat-num">5–10%</span><span class="stat-label">Monthly revenue lost to underpayments — silently</span></div>
+    <div class="stat-div"></div>
+    <div class="stat-item"><span class="stat-num">$0</span><span class="stat-label">Upfront cost — we only earn when you recover</span></div>
+    <div class="stat-div"></div>
+    <div class="stat-item"><span class="stat-num">CDT</span><span class="stat-label">All procedure codes analyzed automatically</span></div>
+  </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<section class="section" id="how">
+  <div class="sec-label">How it works</div>
+  <h2 class="sec-title">From CSV to <span>cash</span> in four steps.</h2>
+  <div class="process-steps">
+    <div class="step">
+      <span class="step-num">01 / UPLOAD</span>
+      <div class="step-icon"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17,8 12,3 7,8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></div>
+      <h3>Upload your claims</h3>
+      <p>Export a payment report from Dentrix, Eaglesoft, or Open Dental as CSV. Drop it in — takes 30 seconds.</p>
+    </div>
+    <div class="step">
+      <span class="step-num">02 / ANALYZE</span>
+      <div class="step-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></div>
+      <h3>We flag every gap</h3>
+      <p>Every claim line is compared to your contracted rates. Underpayments flagged instantly with the exact dollar gap.</p>
+    </div>
+    <div class="step">
+      <span class="step-num">03 / APPEAL</span>
+      <div class="step-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
+      <h3>AI drafts the letter</h3>
+      <p>AI writes a specific, evidence-backed appeal letter for each flagged claim. You review and send — 2 minutes per appeal.</p>
+    </div>
+    <div class="step">
+      <span class="step-num">04 / COLLECT</span>
+      <div class="step-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div>
+      <h3>Keep 82% of recovery</h3>
+      <p>Insurance pays your practice directly. We invoice 18% of what was actually recovered — nothing else, ever.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT WE FIND -->
+<section class="section" style="padding-top:0">
+  <div class="sec-label">What we find</div>
+  <h2 class="sec-title">The exact money <span>leaving your practice</span>.</h2>
+  <div class="findings-grid">
+    <div class="finding-card hot">
+      <span class="finding-icon">💰</span>
+      <h3>Underpayments</h3>
+      <p>Insurer paid less than your contracted rate. No flag, no notice — just quietly short. This is the #1 revenue leak.</p>
+      <span class="finding-avg">Avg gap: $47/claim</span>
+    </div>
+    <div class="finding-card">
+      <span class="finding-icon">🚫</span>
+      <h3>Avoidable Denials</h3>
+      <p>Claims denied for fixable reasons — wrong CDT modifier, missing narrative, coordination of benefits errors. All appealable.</p>
+      <span class="finding-avg">Win rate: ~68%</span>
+    </div>
+    <div class="finding-card">
+      <span class="finding-icon">⏰</span>
+      <h3>Timely Filing Risks</h3>
+      <p>Unresolved claims approaching filing deadlines. We flag these first so you don't lose the right to appeal entirely.</p>
+      <span class="finding-avg">Window: 90–180 days</span>
+    </div>
+    <div class="finding-card">
+      <span class="finding-icon">📋</span>
+      <h3>Bundled Procedures</h3>
+      <p>Insurer bundled procedures that should be billed separately. Each wrongful bundle = lost revenue per patient visit.</p>
+      <span class="finding-avg">Avg recovery: $120</span>
+    </div>
+    <div class="finding-card">
+      <span class="finding-icon">🔄</span>
+      <h3>Coordination Errors</h3>
+      <p>Primary/secondary insurance coordination mistakes. Common with dual-coverage patients — often fully recoverable.</p>
+      <span class="finding-avg">Avg per case: $180</span>
+    </div>
+    <div class="finding-card">
+      <span class="finding-icon">📊</span>
+      <h3>Fee Schedule Drift</h3>
+      <p>Your contracted rates may have changed without notice. We verify every payment against your current agreement.</p>
+      <span class="finding-avg">Check every cycle</span>
+    </div>
+  </div>
+</section>
+
+<!-- CALCULATOR -->
+<section class="section" style="padding-top:0">
+  <div class="sec-label">Recovery calculator</div>
+  <h2 class="sec-title">How much is your <span>practice owed</span>?</h2>
+  <div class="calc-wrap">
+    <div class="calc-row">
+      <div class="calc-field">
+        <label>Monthly insurance billing</label>
+        <input type="range" id="calcBilling" min="40000" max="300000" step="5000" value="100000" oninput="updateCalc()">
+        <div class="val" id="calcBillingVal">$100,000</div>
+      </div>
+      <div class="calc-field">
+        <label>Number of providers</label>
+        <input type="range" id="calcProviders" min="1" max="8" step="1" value="2" oninput="updateCalc()">
+        <div class="val" id="calcProvidersVal">2 dentists</div>
+      </div>
+    </div>
+    <div class="calc-result">
+      <div class="calc-result-label">Estimated monthly underpayment</div>
+      <div class="calc-result-num" id="calcResult">$7,500</div>
+      <div class="calc-result-sub" id="calcResultSub">Your practice keeps $6,150 after ClaimRecover's 18% fee</div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="section" style="padding-top:0" id="pricing">
+  <div class="sec-label">Pricing</div>
+  <h2 class="sec-title">You pay <span>nothing</span> until we recover.</h2>
+  <div class="pricing-grid">
+    <div class="pcard">
+      <p class="pname">Audit</p>
+      <div class="pprice"><sub>$</sub>0</div>
+      <p class="pperiod">Forever free</p>
+      <ul class="pfeats">
+        <li>Full claims audit (3 months)</li>
+        <li>Underpayment flagging</li>
+        <li>Denial code translation</li>
+        <li>Dashboard access</li>
+        <li class="no">AI appeal letters</li>
+        <li class="no">Case tracking</li>
+        <li class="no">Recovery reporting</li>
+      </ul>
+      <button class="pbtn out" onclick="openModal('signup')">Start free audit</button>
+    </div>
+    <div class="pcard feat">
+      <div class="pc-badge">MOST POPULAR</div>
+      <p class="pname">Recovery</p>
+      <div class="pprice">18<sub>%</sub></div>
+      <p class="pperiod">of recovered amount only</p>
+      <ul class="pfeats">
+        <li>Everything in Audit</li>
+        <li>Unlimited AI appeal letters</li>
+        <li>Case status tracking</li>
+        <li>Monthly recovery reports</li>
+        <li>Priority review queue</li>
+        <li>Email notifications</li>
+      </ul>
+      <button class="pbtn gr" onclick="openModal('signup')">Start recovering</button>
+    </div>
+    <div class="pcard">
+      <p class="pname">Enterprise</p>
+      <div class="pprice">15<sub>%</sub></div>
+      <p class="pperiod">+ $199/mo platform fee</p>
+      <ul class="pfeats">
+        <li>Everything in Recovery</li>
+        <li>Multi-location support</li>
+        <li>Dedicated account manager</li>
+        <li>Custom fee schedule import</li>
+        <li>Practice management API</li>
+        <li>Custom reporting</li>
+      </ul>
+      <button class="pbtn out" onclick="openModal('contact')">Contact sales</button>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section" style="padding-top:0">
+  <div class="sec-label">Results</div>
+  <h2 class="sec-title">Practices that <span>stopped leaving money</span> behind.</h2>
+  <div class="testimonials">
+    <div class="tcard">
+      <p class="tcard-quote">"We had no idea Delta Dental had been paying us $38 less per crown for 14 months. ClaimRecover found it in the first audit and the appeal letter was ready in minutes."</p>
+      <div class="tcard-author">
+        <div class="tcard-av">DM</div>
+        <div>
+          <div class="tcard-name">Dr. Michael Chen</div>
+          <div class="tcard-role">Solo Practice, Phoenix AZ</div>
+        </div>
+      </div>
+      <span class="tcard-recovered">$6,840 recovered · Month 1</span>
+    </div>
+    <div class="tcard">
+      <p class="tcard-quote">"Our front desk was spending 6 hours a week on denials. Now ClaimRecover handles the detection and drafts the letters — they just review and send."</p>
+      <div class="tcard-author">
+        <div class="tcard-av">SP</div>
+        <div>
+          <div class="tcard-name">Dr. Sarah Patel</div>
+          <div class="tcard-role">3-Dentist Group, Dallas TX</div>
+        </div>
+      </div>
+      <span class="tcard-recovered">$11,200 recovered · Month 1</span>
+    </div>
+    <div class="tcard">
+      <p class="tcard-quote">"The ROI is ridiculous. We recovered $8k in month one and the fee was $1,440. I wish I'd found this 3 years ago — we've been bleeding money since we opened."</p>
+      <div class="tcard-author">
+        <div class="tcard-av">JR</div>
+        <div>
+          <div class="tcard-name">Dr. James Rodriguez</div>
+          <div class="tcard-role">General Dentistry, Miami FL</div>
+        </div>
+      </div>
+      <span class="tcard-recovered">$8,000 recovered · Month 1</span>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section" style="padding-top:0">
+  <div class="sec-label">Questions</div>
+  <h2 class="sec-title">Everything you need to <span>know</span>.</h2>
+  <div class="faq-list" id="faqList">
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-q"><span>Is this HIPAA-compliant?</span><span class="arrow">+</span></div>
+      <div class="faq-a">Yes. We sign a Business Associate Agreement (BAA) with every practice. Patient data is de-identified in our system — we store only hashed patient references, CDT codes, and dollar amounts. No names, no DOBs, no SSNs stored on our servers.</div>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-q"><span>How do I export claims data from my practice management software?</span><span class="arrow">+</span></div>
+      <div class="faq-a">All major PM systems support this. In Dentrix: Reports → Management → Insurance Payment Summary → Export CSV. In Eaglesoft: Reports → Insurance → Payment Report → Export. In Open Dental: Reports → Monthly → Insurance Payment → Export CSV. Exact steps depend on your version — we have a one-page guide for each PM system inside the dashboard.</div>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-q"><span>When do you charge your fee?</span><span class="arrow">+</span></div>
+      <div class="faq-a">We charge 18% only on amounts actually recovered and confirmed by you. When a payer sends additional payment, you log it in the dashboard. We invoice at month-end based on what was confirmed recovered. Zero fee on flagged claims that weren't recovered. Zero monthly platform fee on the Recovery plan.</div>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-q"><span>Do you submit appeals to insurers directly?</span><span class="arrow">+</span></div>
+      <div class="faq-a">No — and that's intentional. Insurer portals don't have public APIs, and auto-submitting on your behalf creates liability. Instead, we draft a complete, specific appeal letter ready to send. Your billing staff reviews it (typically takes 2 minutes) and submits through your normal channel. This keeps you in control and keeps us compliant.</div>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-q"><span>Which insurance companies do you work with?</span><span class="arrow">+</span></div>
+      <div class="faq-a">All of them. Delta Dental, Cigna, Aetna, MetLife, United Concordia, Humana, Guardian, BlueCross — any payer that uses standard CDT codes and sends remittance data (835/EOB). We use CARC/RARC denial codes which are industry-standard across all commercial payers.</div>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-q"><span>How long does the first audit take?</span><span class="arrow">+</span></div>
+      <div class="faq-a">Upload takes 30 seconds. Analysis typically completes within 2–4 hours. For practices with over 500 claims/month, allow up to 24 hours for the first full audit. After setup, ongoing monitoring is continuous — new claims analyzed within hours of upload.</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-links">
+    <a href="#">Privacy</a>
+    <a href="#">Terms</a>
+    <a href="#">BAA</a>
+    <a href="#" onclick="openModal('contact')">Contact</a>
+  </div>
+  <p>&copy; 2025 ClaimRecover &bull; HIPAA-compliant &bull; Not affiliated with any insurance company</p>
+</footer>
+</div><!-- /landing -->
+
+<!-- ═══════════ APP ═══════════ -->
+<div id="app">
+  <div class="app-nav">
+    <div style="display:flex;align-items:center;gap:8px">
+      <button class="hamburger" onclick="toggleDrawer()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+      <div class="app-nav-logo" onclick="goLanding()">
+        <div class="app-nav-mark"><svg viewBox="0 0 24 24" fill="none" stroke="#080D1A" stroke-width="2.5" stroke-linecap="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
+        <span class="app-nav-name">Claim<span>Recover</span></span>
+      </div>
+    </div>
+    <div class="app-nav-r">
+      <span class="user-tag" id="userTag">Practice</span>
+      <span class="plan-tag" id="planTag">FREE</span>
+      <button class="app-signout" onclick="goLanding()">Sign out</button>
+    </div>
+  </div>
+
+  <div class="app-body">
+    <div class="sb-overlay" id="sbOverlay" onclick="closeDrawer()"></div>
+    <div class="sidebar" id="sidebar">
+      <div class="sb-section">
+        <p class="sb-label">Menu</p>
+        <button class="sb-btn act" id="sb-dashboard" onclick="showPage('dashboard',this)">
+          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          Dashboard
+        </button>
+        <button class="sb-btn" id="sb-upload" onclick="showPage('upload',this)">
+          <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17,8 12,3 7,8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+          Upload Claims
+        </button>
+        <button class="sb-btn" id="sb-claims" onclick="showPage('claims',this)">
+          <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14,2 14,8 20,8"/></svg>
+          Flagged Claims
+        </button>
+        <button class="sb-btn" id="sb-appeals" onclick="showPage('appeals',this)">
+          <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+          Appeals
+        </button>
+        <button class="sb-btn" id="sb-settings" onclick="showPage('settings',this)">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+          Settings
+        </button>
+      </div>
+      <div class="sb-div"></div>
+      <div id="upgradeBox" class="sb-upgrade-box">
+        <p>Upgrade to Recovery to generate AI appeal letters and track cases.</p>
+        <button class="sb-upgrade-btn" onclick="openModal('upgrade')">Upgrade — 18% of recovery</button>
+      </div>
+    </div>
+
+    <!-- MAIN AREA -->
+    <div class="main-area" id="mainArea"></div>
+  </div>
+</div><!-- /app -->
+
+<!-- ═══════════ MODALS ═══════════ -->
+<div class="overlay" id="overlay" onclick="ovClick(event)">
+  <div class="modal" id="modalBox" onclick="event.stopPropagation()">
+    <button class="m-close" onclick="closeModal()">&#10005;</button>
+
+    <!-- SIGNUP -->
+    <div id="fSU">
+      <p class="m-title">Start your free audit</p>
+      <p class="m-sub">No credit card. We only charge when you recover.</p>
+      <div class="err-box" id="eSU"></div>
+      <div class="field"><label>Practice name</label><input type="text" id="sPractice" placeholder="Bright Smile Dental"></div>
+      <div class="field"><label>Your name</label><input type="text" id="sName" placeholder="Dr. Jane Smith"></div>
+      <div class="field"><label>Email</label><input type="email" id="sEmail" placeholder="jane@brightsmile.com"></div>
+      <div class="field"><label>Password</label>
+        <div class="pw-wrap">
+          <input type="password" id="sPass" placeholder="Min. 8 characters">
+          <button type="button" class="pw-eye" onclick="togglePw('sPass',this)">Show</button>
+        </div>
+      </div>
+      <button class="m-btn" id="sBtnSU" onclick="doSignup()">Create account &rarr;</button>
+      <p class="m-sw">Already have an account? <a onclick="switchForm('login')">Sign in</a></p>
+    </div>
+
+    <!-- LOGIN -->
+    <div id="fLI" style="display:none">
+      <p class="m-title">Welcome back</p>
+      <p class="m-sub">Sign in to your ClaimRecover dashboard.</p>
+      <div class="err-box" id="eLI"></div>
+      <div class="field"><label>Email</label><input type="email" id="lEmail" placeholder="jane@brightsmile.com"></div>
+      <div class="field"><label>Password</label>
+        <div class="pw-wrap">
+          <input type="password" id="lPass" placeholder="Your password">
+          <button type="button" class="pw-eye" onclick="togglePw('lPass',this)">Show</button>
+        </div>
+      </div>
+      <p style="text-align:right;margin:-4px 0 14px"><a onclick="switchForm('forgot')" style="font-size:12px;color:var(--green);cursor:pointer">Forgot password?</a></p>
+      <button class="m-btn" id="sBtnLI" onclick="doLogin()">Sign in &rarr;</button>
+      <p class="m-sw">No account? <a onclick="switchForm('signup')">Get free audit</a></p>
+    </div>
+
+    <!-- FORGOT -->
+    <div id="fForgot" style="display:none">
+      <p class="m-title">Reset password</p>
+      <p class="m-sub">Enter your email and we'll send a reset link.</p>
+      <div class="err-box" id="eFgt"></div>
+      <div class="ok-box" id="oFgt"></div>
+      <div class="field"><label>Email</label><input type="email" id="fgtEmail" placeholder="jane@brightsmile.com"></div>
+      <button class="m-btn" id="sBtnFgt" onclick="doForgot()">Send reset link &rarr;</button>
+      <p class="m-sw"><a onclick="switchForm('login')">Back to sign in</a></p>
+    </div>
+
+    <!-- UPGRADE -->
+    <div id="fUP" style="display:none">
+      <p class="m-title">Upgrade to Recovery</p>
+      <p class="m-sub">Generate AI appeal letters and track every case to resolution. You pay 18% of what we actually recover — nothing else.</p>
+      <div style="background:var(--bg3);border:1px solid var(--green-b);border-radius:var(--r-sm);padding:18px;margin-bottom:18px">
+        <ul class="pfeats">
+          <li>Unlimited AI appeal letter generation</li>
+          <li>Case status tracker (Flagged → Recovered)</li>
+          <li>Monthly recovery reports</li>
+          <li>Priority review queue</li>
+          <li>Email notifications on flag/resolution</li>
+          <li>Export reports as PDF</li>
+        </ul>
+      </div>
+      <p style="font-family:var(--mono);font-size:11px;color:var(--white3);margin-bottom:14px">18% of recovered amount only. No monthly fee. No recovery = no charge.</p>
+      <button class="m-btn" onclick="startCheckout('recovery')">Upgrade &rarr; start recovering</button>
+    </div>
+
+    <!-- CONTACT -->
+    <div id="fContact" style="display:none">
+      <p class="m-title">Talk to us</p>
+      <p class="m-sub">For Enterprise (multi-location) or questions about your audit.</p>
+      <div class="err-box" id="eCon"></div>
+      <div class="ok-box" id="oCon"></div>
+      <div class="field"><label>Name</label><input type="text" id="conName" placeholder="Dr. Jane Smith"></div>
+      <div class="field"><label>Email</label><input type="email" id="conEmail" placeholder="jane@practice.com"></div>
+      <div class="field"><label>Message</label><textarea id="conMsg" placeholder="Tell us about your practice and what you need..."></textarea></div>
+      <button class="m-btn" id="sBtnCon" onclick="doContact()">Send message &rarr;</button>
+    </div>
+
+    <!-- APPEAL MODAL -->
+    <div id="fAppeal" style="display:none">
+      <p class="m-title">AI Appeal Letter</p>
+      <p class="m-sub" id="appealSub">Generating appeal for flagged claim...</p>
+      <div class="appeal-letter" id="appealLetter"><span class="stream-cursor">▋</span></div>
+      <div class="btn-row">
+        <button class="m-btn out" onclick="copyAppeal()">Copy letter</button>
+        <button class="m-btn" onclick="closeModal()">Done — I'll send it</button>
+      </div>
+    </div>
+
+    <!-- LOG RECOVERY -->
+    <div id="fLogRecovery" style="display:none">
+      <p class="m-title">Log recovered amount</p>
+      <p class="m-sub">When the insurer sends additional payment, log it here to close the case and trigger your recovery report.</p>
+      <div class="err-box" id="eRec"></div>
+      <div class="field"><label>Amount recovered ($)</label><input type="number" id="recAmount" placeholder="e.g. 385.00" step="0.01" min="0"></div>
+      <div class="field"><label>Date received</label><input type="date" id="recDate"></div>
+      <div class="field"><label>Notes (optional)</label><textarea id="recNotes" placeholder="e.g. Delta Dental issued EFT on 7/15..."></textarea></div>
+      <button class="m-btn" id="sBtnRec" onclick="doLogRecovery()">Log recovery &rarr;</button>
+    </div>
+
+    <!-- RESET PASSWORD -->
+    <div id="fResetPw" style="display:none">
+      <p class="m-title">Set new password</p>
+      <div class="err-box" id="eReset"></div>
+      <div class="field"><label>New password</label>
+        <div class="pw-wrap">
+          <input type="password" id="resetPw" placeholder="Min. 8 characters">
+          <button type="button" class="pw-eye" onclick="togglePw('resetPw',this)">Show</button>
+        </div>
+      </div>
+      <button class="m-btn" onclick="doResetPassword()">Set new password &rarr;</button>
+    </div>
+
+  </div>
+</div>
+
+<script>
+/* ═══════════════════════════════════
+   DODO PAYMENTS
+═══════════════════════════════════ */
+const DODO_LINKS = {
+  recovery: 'PASTE_YOUR_DODO_RECOVERY_CHECKOUT_LINK_HERE'
+};
+
+/* ═══════════════════════════════════
+   STATE
+═══════════════════════════════════ */
+let user = null, plan = 'free';
+let claims = [], currentAppealClaimId = null, currentLogClaimId = null;
+let resetToken = '';
+
+/* ═══════════════════════════════════
+   UTILS
+═══════════════════════════════════ */
+function escH(t){ return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function fmt$(n){ return '$'+Number(n).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}); }
+function fmtDate(d){ return d?new Date(d).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}):'—'; }
+
+/* ═══════════════════════════════════
+   CALCULATOR
+═══════════════════════════════════ */
+function updateCalc(){
+  const billing = parseInt(document.getElementById('calcBilling').value);
+  const providers = parseInt(document.getElementById('calcProviders').value);
+  document.getElementById('calcBillingVal').textContent = '$'+billing.toLocaleString();
+  document.getElementById('calcProvidersVal').textContent = providers + (providers===1?' dentist':' dentists');
+  const underpayment = billing * 0.075;
+  const adjusted = underpayment * (1 + (providers-1)*0.15);
+  const fee = adjusted * 0.18;
+  const kept = adjusted - fee;
+  document.getElementById('calcResult').textContent = fmt$(adjusted);
+  document.getElementById('calcResultSub').textContent = `Your practice keeps ${fmt$(kept)} after ClaimRecover's 18% fee`;
+}
+updateCalc();
+
+/* ═══════════════════════════════════
+   FAQ
+═══════════════════════════════════ */
+function toggleFaq(el){ el.classList.toggle('open'); }
+
+/* ═══════════════════════════════════
+   PASSWORD TOGGLE
+═══════════════════════════════════ */
+function togglePw(id, btn){
+  const el = document.getElementById(id);
+  el.type = el.type === 'password' ? 'text' : 'password';
+  btn.textContent = el.type === 'password' ? 'Show' : 'Hide';
+}
+
+/* ═══════════════════════════════════
+   MODAL
+═══════════════════════════════════ */
+const ALL_FORMS = ['fSU','fLI','fForgot','fUP','fContact','fAppeal','fLogRecovery','fResetPw'];
+function openModal(t){
+  document.getElementById('overlay').classList.add('open');
+  const map = {signup:'fSU',login:'fLI',forgot:'fForgot',upgrade:'fUP',contact:'fContact',appeal:'fAppeal',logRecovery:'fLogRecovery',resetPassword:'fResetPw'};
+  ALL_FORMS.forEach(id=>{const el=document.getElementById(id);if(el)el.style.display=(id===(map[t]||t))?'block':'none'});
+  const modal = document.getElementById('modalBox');
+  modal.className = (t==='appeal') ? 'modal wide' : 'modal';
+  [].forEach.call(document.querySelectorAll('.err-box,.ok-box'),el=>el.style.display='none');
+}
+function closeModal(){ document.getElementById('overlay').classList.remove('open'); }
+function ovClick(e){ if(e.target===document.getElementById('overlay'))closeModal(); }
+function switchForm(t){ openModal(t); }
+function showErr(id,msg){ const e=document.getElementById(id);if(e){e.textContent=msg;e.style.display='block'} }
+function showOk(id,msg){ const e=document.getElementById(id);if(e){e.textContent=msg;e.style.display='block'} }
+
+/* ═══════════════════════════════════
+   AUTH
+═══════════════════════════════════ */
+async function doSignup(){
+  const practice=document.getElementById('sPractice').value.trim();
+  const name=document.getElementById('sName').value.trim();
+  const email=document.getElementById('sEmail').value.trim();
+  const pass=document.getElementById('sPass').value;
+  if(!practice||!name||!email||!pass){showErr('eSU','Please fill in all fields.');return}
+  if(!email.includes('@')){showErr('eSU','Enter a valid email address.');return}
+  if(pass.length<8){showErr('eSU','Password must be at least 8 characters.');return}
+  const btn=document.getElementById('sBtnSU');
+  btn.disabled=true;btn.textContent='Creating account…';
+  try{
+    const res=await fetch('/api/auth',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'signup',name,email,password:pass,practice})});
+    const data=await res.json();
+    if(!res.ok||data.error){showErr('eSU',data.error?.message||'Signup failed. Please try again.');return}
+    user={email:data.user.email,name:data.user.name,practice:data.user.practice};
+    plan=data.user.plan||'free';
+    localStorage.setItem('cr_email',email);
+    closeModal();
+    await initApp();
+  }catch(e){showErr('eSU','Could not connect. Please try again.');}
+  finally{btn.disabled=false;btn.textContent='Create account →'}
+}
+
+async function doLogin(){
+  const email=document.getElementById('lEmail').value.trim();
+  const pass=document.getElementById('lPass').value;
+  if(!email||!pass){showErr('eLI','Please fill in all fields.');return}
+  const btn=document.getElementById('sBtnLI');
+  btn.disabled=true;btn.textContent='Signing in…';
+  try{
+    const res=await fetch('/api/auth',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'login',email,password:pass})});
+    const data=await res.json();
+    if(!res.ok||data.error){showErr('eLI',data.error?.message||'Incorrect email or password.');return}
+    user={email:data.user.email,name:data.user.name,practice:data.user.practice};
+    plan=data.user.plan||'free';
+    localStorage.setItem('cr_email',email);
+    closeModal();
+    await initApp();
+  }catch(e){showErr('eLI','Could not connect. Please try again.');}
+  finally{btn.disabled=false;btn.textContent='Sign in →'}
+}
+
+async function doForgot(){
+  const email=document.getElementById('fgtEmail').value.trim();
+  if(!email||!email.includes('@')){showErr('eFgt','Enter a valid email address.');return}
+  const btn=document.getElementById('sBtnFgt');
+  btn.disabled=true;btn.textContent='Sending…';
+  try{
+    const res=await fetch('/api/auth',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'forgotPassword',email})});
+    const data=await res.json();
+    if(!res.ok||data.error){showErr('eFgt',data.error?.message||'Could not send reset link.');return}
+    showOk('oFgt','Reset link sent! Check your inbox.');
+  }catch(e){showErr('eFgt','Could not connect. Please try again.');}
+  finally{btn.disabled=false;btn.textContent='Send reset link →'}
+}
+
+async function doResetPassword(){
+  const pass=document.getElementById('resetPw').value;
+  if(!pass||pass.length<8){showErr('eReset','Password must be at least 8 characters.');return}
+  if(!resetToken){showErr('eReset','Reset link expired. Please request a new one.');return}
+  try{
+    const res=await fetch('/api/auth',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'updatePassword',token:resetToken,password:pass})});
+    const data=await res.json();
+    if(!res.ok||data.error){showErr('eReset',data.error?.message||'Could not update password.');return}
+    closeModal();
+    openModal('login');
+    document.getElementById('eLI').textContent='Password updated! Sign in with your new password.';
+    document.getElementById('eLI').style.display='block';
+    document.getElementById('eLI').style.color='var(--green)';
+    document.getElementById('eLI').style.background='var(--green-bg)';
+    history.replaceState(null,'',window.location.pathname);
+  }catch(e){showErr('eReset','Could not connect. Please try again.');}
+}
+
+function goLanding(){
+  localStorage.removeItem('cr_email');
+  user=null;plan='free';claims=[];
+  document.getElementById('app').style.display='none';
+  document.getElementById('landing').style.display='block';
+  document.body.style.overflow='auto';
+}
+
+/* ═══════════════════════════════════
+   APP INIT
+═══════════════════════════════════ */
+async function initApp(){
+  document.getElementById('landing').style.display='none';
+  document.getElementById('app').style.display='flex';
+  document.body.style.overflow='hidden';
+  document.getElementById('userTag').textContent=user.practice||user.name;
+  document.getElementById('planTag').textContent=plan.toUpperCase();
+  const upBox=document.getElementById('upgradeBox');
+  if(upBox)upBox.style.display=plan==='free'?'block':'none';
+  await loadClaims();
+  showPage('dashboard',document.getElementById('sb-dashboard'));
+}
+
+/* ═══════════════════════════════════
+   LOAD CLAIMS
+═══════════════════════════════════ */
+async function loadClaims(){
+  try{
+    const res=await fetch('/api/claims?email='+encodeURIComponent(user.email));
+    const data=await res.json();
+    claims=data.claims||[];
+  }catch(e){console.error('loadClaims',e)}
+}
+
+/* ═══════════════════════════════════
+   SIDEBAR + NAVIGATION
+═══════════════════════════════════ */
+function toggleDrawer(){
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('sbOverlay').classList.toggle('show');
+}
+function closeDrawer(){
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('sbOverlay').classList.remove('show');
+}
+function showPage(page, btn){
+  document.querySelectorAll('.sb-btn').forEach(b=>b.classList.remove('act'));
+  if(btn)btn.classList.add('act');
+  const m=document.getElementById('mainArea');
+  closeDrawer();
+  if(page==='dashboard')renderDashboard(m);
+  else if(page==='upload')renderUpload(m);
+  else if(page==='claims')renderClaims(m);
+  else if(page==='appeals')renderAppeals(m);
+  else if(page==='settings')renderSettings(m);
+}
+
+/* ═══════════════════════════════════
+   DASHBOARD
+═══════════════════════════════════ */
+function renderDashboard(m){
+  const flagged=claims.filter(c=>c.status==='flagged');
+  const recovered=claims.filter(c=>c.status==='recovered');
+  const submitted=claims.filter(c=>c.status==='submitted');
+  const totalGap=flagged.reduce((a,c)=>a+(c.gap||0),0);
+  const totalRecovered=recovered.reduce((a,c)=>a+(c.recovered_amount||0),0);
+  const ourFee=totalRecovered*0.18;
+  const yourKept=totalRecovered-ourFee;
+
+  m.innerHTML=`
+  <div class="fade-in">
+    <div class="page-title">Overview</div>
+    <p class="page-sub">Welcome back, ${escH(user.name)}. Here's your recovery summary.</p>
+    <div class="metric-grid">
+      <div class="metric-card">
+        <div class="metric-label">Flagged Claims</div>
+        <div class="metric-val red">${flagged.length}</div>
+        <div class="metric-change dn">${fmt$(totalGap)} estimated gap</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Submitted Appeals</div>
+        <div class="metric-val">${submitted.length}</div>
+        <div class="metric-change">awaiting response</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Total Recovered</div>
+        <div class="metric-val green">${fmt$(totalRecovered)}</div>
+        <div class="metric-change up">you kept ${fmt$(yourKept)}</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">ClaimRecover Fee</div>
+        <div class="metric-val">${fmt$(ourFee)}</div>
+        <div class="metric-change">18% of recovered only</div>
+      </div>
+    </div>
+    ${claims.length===0?renderEmptyState():renderRecentTable()}
+  </div>`;
+}
+function renderEmptyState(){
+  return`<div class="table-wrap" style="padding:48px;text-align:center">
+    <div style="font-size:32px;margin-bottom:12px">📂</div>
+    <div style="font-family:var(--head);font-size:16px;font-weight:600;color:var(--white);margin-bottom:8px">No claims uploaded yet</div>
+    <p style="font-size:13px;color:var(--white3);margin-bottom:20px;max-width:360px;margin-left:auto;margin-right:auto">Upload your first payment report from Dentrix, Eaglesoft, or Open Dental to start finding underpayments.</p>
+    <button class="tbl-btn primary" onclick="showPage('upload',document.getElementById('sb-upload'))">Upload claims CSV</button>
+  </div>`;
+}
+function renderRecentTable(){
+  const recent=claims.slice(0,8);
+  return`<div class="table-wrap">
+    <div class="table-header">
+      <span class="table-title">Recent Claims</span>
+      <div class="table-actions">
+        <button class="tbl-btn" onclick="showPage('claims',document.getElementById('sb-claims'))">View all</button>
+        <button class="tbl-btn primary" onclick="showPage('upload',document.getElementById('sb-upload'))">Upload new CSV</button>
+      </div>
+    </div>
+    <div class="table-scroll">
+      <table>
+        <thead><tr>
+          <th>Claim ID</th><th>CDT Code</th><th>Billed</th><th>Paid</th><th>Gap</th><th>Status</th><th>Action</th>
+        </tr></thead>
+        <tbody>${recent.map(claimRow).join('')}</tbody>
+      </table>
+    </div>
+  </div>`;
+}
+
+/* ═══════════════════════════════════
+   CLAIMS PAGE
+═══════════════════════════════════ */
+function renderClaims(m){
+  m.innerHTML=`<div class="fade-in">
+    <div class="page-title">Flagged Claims</div>
+    <p class="page-sub">Every claim where we found an underpayment or appealable denial.</p>
+    <div class="table-wrap">
+      <div class="table-header">
+        <span class="table-title">${claims.length} claims analyzed</span>
+        <div class="table-actions">
+          <button class="tbl-btn primary" onclick="showPage('upload',document.getElementById('sb-upload'))">Upload new CSV</button>
+        </div>
+      </div>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Claim ID</th><th>CDT Code</th><th>Payer</th><th>Billed</th><th>Paid</th><th>Gap</th><th>Denial Code</th><th>Status</th><th>Action</th></tr></thead>
+          <tbody>${claims.length?claims.map(claimRowFull).join(''):'<tr><td colspan="9" style="text-align:center;padding:32px;color:var(--white3)">No claims yet — upload a CSV to start</td></tr>'}</tbody>
+        </table>
+      </div>
+    </div>
+  </div>`;
+}
+function claimRow(c){
+  return`<tr>
+    <td style="font-family:var(--mono);font-size:12px">${escH(c.claim_id||'—')}</td>
+    <td><span style="font-family:var(--mono);font-size:12px;color:var(--white)">${escH(c.cdt_code||'—')}</span></td>
+    <td class="amount-pos">${fmt$(c.billed_amount||0)}</td>
+    <td>${fmt$(c.paid_amount||0)}</td>
+    <td class="amount-neg">${c.gap>0?'-'+fmt$(c.gap):fmt$(0)}</td>
+    <td>${statusBadge(c.status)}</td>
+    <td>${claimAction(c)}</td>
+  </tr>`;
+}
+function claimRowFull(c){
+  return`<tr>
+    <td style="font-family:var(--mono);font-size:12px">${escH(c.claim_id||'—')}</td>
+    <td style="font-family:var(--mono);font-size:12px">${escH(c.cdt_code||'—')}</td>
+    <td style="font-size:12px;color:var(--white3)">${escH(c.payer_name||'—')}</td>
+    <td class="amount-pos">${fmt$(c.billed_amount||0)}</td>
+    <td>${fmt$(c.paid_amount||0)}</td>
+    <td class="amount-neg">${c.gap>0?'-'+fmt$(c.gap):fmt$(0)}</td>
+    <td style="font-family:var(--mono);font-size:11px;color:var(--white4)">${escH(c.carc_codes||'—')}</td>
+    <td>${statusBadge(c.status)}</td>
+    <td>${claimAction(c)}</td>
+  </tr>`;
+}
+function statusBadge(s){
+  const map={flagged:'flagged',submitted:'submitted',recovered:'recovered',denied:'denied',reviewing:'reviewing'};
+  const cls=map[s]||'reviewing';
+  const labels={flagged:'⚑ Flagged',submitted:'✈ Submitted',recovered:'✓ Recovered',denied:'✗ Denied',reviewing:'○ Reviewing'};
+  return`<span class="status-badge ${cls}">${labels[s]||s||'Unknown'}</span>`;
+}
+function claimAction(c){
+  if(c.status==='flagged'){
+    if(plan==='free') return`<button class="tbl-btn" onclick="openModal('upgrade')" style="font-size:11px">Unlock appeal</button>`;
+    return`<button class="tbl-btn primary" onclick="generateAppeal('${c.id}')" style="font-size:11px">Draft appeal</button>`;
+  }
+  if(c.status==='submitted') return`<button class="tbl-btn" onclick="openLogRecovery('${c.id}')" style="font-size:11px">Log recovery</button>`;
+  if(c.status==='recovered') return`<span style="font-size:11px;color:var(--green);font-family:var(--mono)">${fmt$(c.recovered_amount||0)}</span>`;
+  return`<span style="font-size:11px;color:var(--white4)">—</span>`;
+}
+
+/* ═══════════════════════════════════
+   APPEALS PAGE
+═══════════════════════════════════ */
+function renderAppeals(m){
+  const appealed=claims.filter(c=>['submitted','recovered','denied'].includes(c.status));
+  m.innerHTML=`<div class="fade-in">
+    <div class="page-title">Appeals</div>
+    <p class="page-sub">Track submitted appeals and log confirmed recoveries.</p>
+    <div class="table-wrap">
+      <div class="table-header"><span class="table-title">${appealed.length} appeals in progress</span></div>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Claim ID</th><th>CDT Code</th><th>Gap</th><th>Status</th><th>Submitted</th><th>Recovered</th><th>Action</th></tr></thead>
+          <tbody>${appealed.length?appealed.map(a=>`<tr>
+            <td style="font-family:var(--mono);font-size:12px">${escH(a.claim_id||'—')}</td>
+            <td style="font-family:var(--mono);font-size:12px">${escH(a.cdt_code||'—')}</td>
+            <td class="amount-neg">${a.gap>0?'-'+fmt$(a.gap):fmt$(0)}</td>
+            <td>${statusBadge(a.status)}</td>
+            <td style="font-size:12px;color:var(--white3)">${fmtDate(a.submitted_date)}</td>
+            <td class="amount-pos">${a.recovered_amount>0?fmt$(a.recovered_amount):'—'}</td>
+            <td>${a.status==='submitted'?`<button class="tbl-btn" onclick="openLogRecovery('${a.id}')" style="font-size:11px">Log recovery</button>`:'—'}</td>
+          </tr>`).join(''):'<tr><td colspan="7" style="text-align:center;padding:32px;color:var(--white3)">No appeals submitted yet</td></tr>'}</tbody>
+        </table>
+      </div>
+    </div>
+  </div>`;
+}
+
+/* ═══════════════════════════════════
+   UPLOAD PAGE
+═══════════════════════════════════ */
+function renderUpload(m){
+  m.innerHTML=`<div class="fade-in">
+    <div class="page-title">Upload Claims</div>
+    <p class="page-sub">Export a payment report from your practice management software and drop it here.</p>
+    <div class="upload-zone" id="dropZone" ondragover="onDragOver(event)" ondragleave="onDragLeave(event)" ondrop="onDrop(event)" onclick="document.getElementById('fileInput').click()">
+      <div class="upload-icon"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17,8 12,3 7,8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></div>
+      <div class="upload-title">Drop your CSV here, or click to browse</div>
+      <p class="upload-sub">Works with Dentrix, Eaglesoft, Open Dental exports &bull; CSV format required</p>
+    </div>
+    <input type="file" id="fileInput" accept=".csv" onchange="handleFileSelect(event)">
+    <div id="uploadResult" style="margin-top:20px"></div>
+    <div style="margin-top:28px;background:var(--bg2);border:1px solid var(--b1);border-radius:var(--r);padding:20px">
+      <p style="font-family:var(--mono);font-size:11px;color:var(--green);letter-spacing:2px;text-transform:uppercase;margin-bottom:12px">Expected CSV format</p>
+      <p style="font-size:12px;color:var(--white3);margin-bottom:10px">Your file should include these columns (exact names may vary by PM software):</p>
+      <code style="font-family:var(--mono);font-size:12px;color:var(--white2);background:var(--bg3);padding:12px;border-radius:6px;display:block;line-height:1.8">claim_id, cdt_code, billed_amount, paid_amount, contracted_amount, payer_name, date_of_service, carc_codes</code>
+      <p style="font-size:12px;color:var(--white4);margin-top:10px">Missing some columns? No problem — upload what you have and our analyzer will work with what's available.</p>
+    </div>
+  </div>`;
+}
+
+function onDragOver(e){ e.preventDefault(); document.getElementById('dropZone')?.classList.add('dragging'); }
+function onDragLeave(){ document.getElementById('dropZone')?.classList.remove('dragging'); }
+function onDrop(e){ e.preventDefault(); onDragLeave(); const f=e.dataTransfer?.files?.[0]; if(f)processFile(f); }
+function handleFileSelect(e){ const f=e.target?.files?.[0]; if(f)processFile(f); }
+
+async function processFile(file){
+  if(!file.name.endsWith('.csv')){
+    document.getElementById('uploadResult').innerHTML=`<div class="err-box" style="display:block">Please upload a CSV file.</div>`;
+    return;
+  }
+  const res=document.getElementById('uploadResult');
+  res.innerHTML=`<div style="background:var(--bg2);border:1px solid var(--b1);border-radius:var(--r);padding:20px;text-align:center"><div class="stream-cursor" style="font-size:24px">▋</div><p style="margin-top:12px;color:var(--white3)">Analyzing ${escH(file.name)}...</p></div>`;
+  try{
+    const text=await file.text();
+    const response=await fetch('/api/upload',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:user.email,filename:file.name,csvData:text})});
+    const data=await response.json();
+    if(!response.ok||data.error){res.innerHTML=`<div class="err-box" style="display:block">${escH(data.error?.message||'Upload failed.')}</div>`;return}
+    await loadClaims();
+    res.innerHTML=`<div style="background:var(--green-bg);border:1px solid var(--green-b);border-radius:var(--r);padding:24px;text-align:center">
+      <div style="font-size:28px;margin-bottom:8px">✓</div>
+      <div style="font-family:var(--head);font-size:16px;font-weight:600;color:var(--green);margin-bottom:4px">${data.flagged||0} claims flagged</div>
+      <p style="font-size:13px;color:var(--white3);margin-bottom:16px">${data.total||0} total claims analyzed &bull; ${data.underpaid||0} underpaid &bull; ${data.denied||0} denied</p>
+      <button class="tbl-btn primary" onclick="showPage('claims',document.getElementById('sb-claims'))">View flagged claims</button>
+    </div>`;
+  }catch(e){res.innerHTML=`<div class="err-box" style="display:block">Could not process file. Please try again.</div>`;}
+}
+
+/* ═══════════════════════════════════
+   SETTINGS
+═══════════════════════════════════ */
+function renderSettings(m){
+  m.innerHTML=`<div class="fade-in">
+    <div class="page-title">Settings</div>
+    <p class="page-sub">Manage your practice information and billing.</p>
+    <div style="display:flex;flex-direction:column;gap:16px;max-width:540px">
+      <div style="background:var(--bg2);border:1px solid var(--b1);border-radius:var(--r);padding:24px">
+        <p style="font-family:var(--head);font-size:14px;font-weight:600;color:var(--white);margin-bottom:14px">Practice Details</p>
+        <div class="field"><label>Practice name</label><input type="text" id="setPractice" value="${escH(user.practice||'')}"></div>
+        <div class="field"><label>Contact name</label><input type="text" id="setName" value="${escH(user.name||'')}"></div>
+        <div class="field"><label>Email</label><input type="email" id="setEmail" value="${escH(user.email||'')}" readonly style="opacity:.6"></div>
+        <button class="tbl-btn primary" onclick="saveSettings()">Save changes</button>
+      </div>
+      <div style="background:var(--bg2);border:1px solid var(--b1);border-radius:var(--r);padding:24px">
+        <p style="font-family:var(--head);font-size:14px;font-weight:600;color:var(--white);margin-bottom:8px">Plan</p>
+        <p style="font-size:13px;color:var(--white3);margin-bottom:14px">Current plan: <strong style="color:${plan==='free'?'var(--white)':'var(--green)'}">${plan==='free'?'Free Audit':'Recovery (18%)'}</strong></p>
+        ${plan==='free'?`<button class="tbl-btn primary" onclick="openModal('upgrade')">Upgrade to Recovery</button>`:`<p style="font-size:12px;color:var(--white4);font-family:var(--mono)">You're on the Recovery plan. 18% invoiced monthly on confirmed recoveries.</p>`}
+      </div>
+      <div style="background:var(--bg2);border:1px solid var(--b1);border-radius:var(--r);padding:24px">
+        <p style="font-family:var(--head);font-size:14px;font-weight:600;color:var(--white);margin-bottom:8px">BAA &amp; Compliance</p>
+        <p style="font-size:13px;color:var(--white3);margin-bottom:14px">Your Business Associate Agreement is on file. We are HIPAA-compliant for this data.</p>
+        <button class="tbl-btn" onclick="alert('BAA download coming soon — email support@claimrecover.app for your copy.')">Download BAA</button>
+      </div>
+    </div>
+  </div>`;
+}
+async function saveSettings(){
+  const practice=document.getElementById('setPractice').value.trim();
+  const name=document.getElementById('setName').value.trim();
+  if(!practice||!name){alert('Please fill in all fields.');return}
+  try{
+    await fetch('/api/auth',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'updateProfile',email:user.email,practice,name})});
+    user.practice=practice;user.name=name;
+    document.getElementById('userTag').textContent=practice;
+    alert('Settings saved.');
+  }catch(e){alert('Could not save settings.');}
+}
+
+/* ═══════════════════════════════════
+   APPEAL GENERATION (STREAMING)
+═══════════════════════════════════ */
+async function generateAppeal(claimId){
+  const claim=claims.find(c=>c.id===claimId);
+  if(!claim)return;
+  currentAppealClaimId=claimId;
+  openModal('appeal');
+  document.getElementById('appealSub').textContent=`Appeal for Claim ${claim.claim_id||claimId} — ${claim.cdt_code||'CDT'} — Gap: ${fmt$(claim.gap||0)}`;
+  const letterEl=document.getElementById('appealLetter');
+  letterEl.innerHTML='<span class="stream-cursor">▋</span>';
+
+  try{
+    const res=await fetch('/api/appeal',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({email:user.email,claimId,claim})
+    });
+    if(!res.ok){const d=await res.json().catch(()=>({}));letterEl.textContent=d.error?.message||'Could not generate appeal.';return}
+
+    const reader=res.body.getReader();
+    const decoder=new TextDecoder();
+    let fullText='';
+    let buffer='';
+    while(true){
+      const{done,value}=await reader.read();
+      if(done)break;
+      buffer+=decoder.decode(value,{stream:true});
+      const lines=buffer.split('\n');
+      buffer=lines.pop()||'';
+      for(const line of lines){
+        if(!line.startsWith('data: '))continue;
+        const raw=line.slice(6).trim();
+        if(raw==='[DONE]')continue;
+        try{
+          const parsed=JSON.parse(raw);
+          const delta=parsed?.choices?.[0]?.delta?.content||'';
+          if(delta){fullText+=delta;letterEl.innerHTML=escH(fullText)+'<span class="stream-cursor">▋</span>';}
+        }catch{}
+      }
+    }
+    letterEl.innerHTML=escH(fullText);
+    // Mark as submitted in local state + update on server
+    const idx=claims.findIndex(c=>c.id===claimId);
+    if(idx>=0){claims[idx].status='submitted';claims[idx].submitted_date=new Date().toISOString();}
+    await fetch('/api/claims',{method:'PATCH',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:user.email,claimId,status:'submitted',submitted_date:new Date().toISOString()})});
+  }catch(e){letterEl.textContent='Could not generate appeal. Please try again.';}
+}
+
+function copyAppeal(){
+  const text=document.getElementById('appealLetter').innerText;
+  navigator.clipboard.writeText(text).then(()=>alert('Letter copied to clipboard!'));
+}
+
+/* ═══════════════════════════════════
+   LOG RECOVERY
+═══════════════════════════════════ */
+function openLogRecovery(claimId){
+  currentLogClaimId=claimId;
+  document.getElementById('recDate').value=new Date().toISOString().split('T')[0];
+  openModal('logRecovery');
+}
+async function doLogRecovery(){
+  const amount=parseFloat(document.getElementById('recAmount').value);
+  const date=document.getElementById('recDate').value;
+  const notes=document.getElementById('recNotes').value.trim();
+  if(!amount||amount<=0){showErr('eRec','Enter a valid recovered amount.');return}
+  const btn=document.getElementById('sBtnRec');
+  btn.disabled=true;btn.textContent='Logging…';
+  try{
+    const res=await fetch('/api/claims',{method:'PATCH',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:user.email,claimId:currentLogClaimId,status:'recovered',recovered_amount:amount,recovery_date:date,notes})});
+    const data=await res.json();
+    if(!res.ok||data.error){showErr('eRec',data.error?.message||'Could not log recovery.');return}
+    const idx=claims.findIndex(c=>c.id===currentLogClaimId);
+    if(idx>=0){claims[idx].status='recovered';claims[idx].recovered_amount=amount;}
+    closeModal();
+    showPage('appeals',document.getElementById('sb-appeals'));
+  }catch(e){showErr('eRec','Could not connect. Please try again.');}
+  finally{btn.disabled=false;btn.textContent='Log recovery →'}
+}
+
+/* ═══════════════════════════════════
+   CONTACT
+═══════════════════════════════════ */
+async function doContact(){
+  const name=document.getElementById('conName').value.trim();
+  const email=document.getElementById('conEmail').value.trim();
+  const msg=document.getElementById('conMsg').value.trim();
+  if(!name||!email||!msg){showErr('eCon','Please fill in all fields.');return}
+  showOk('oCon','Message received! We\'ll reply within 24 hours.');
+}
+
+/* ═══════════════════════════════════
+   CHECKOUT
+═══════════════════════════════════ */
+function startCheckout(p){
+  closeModal();
+  const base=DODO_LINKS[p];
+  if(!base||base.includes('PASTE_YOUR_')){
+    alert('Dodo Payments not connected yet.\n\nAdd your checkout link in DODO_LINKS at the top of the script.');
+    return;
+  }
+  const params=new URLSearchParams({email:user?user.email:'',plan:p});
+  window.location.href=base+(base.includes('?')?'&':'?')+params.toString();
+}
+
+/* ═══════════════════════════════════
+   BOOT
+═══════════════════════════════════ */
+window.addEventListener('load', async()=>{
+  if(window.location.hash&&window.location.hash.includes('type=recovery')){
+    const hp=new URLSearchParams(window.location.hash.substring(1));
+    const at=hp.get('access_token');
+    if(at){resetToken=at;openModal('resetPassword');history.replaceState(null,'',window.location.pathname+window.location.search);}
+  }
+  const savedEmail=localStorage.getItem('cr_email');
+  if(savedEmail){
+    try{
+      const res=await fetch('/api/auth',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'getUser',email:savedEmail})});
+      const data=await res.json();
+      if(res.ok&&data.user){
+        user={email:data.user.email,name:data.user.name,practice:data.user.practice};
+        plan=data.user.plan||'free';
+        await initApp();
+      }else localStorage.removeItem('cr_email');
+    }catch(e){console.error('session restore',e);}
+  }
+  const params=new URLSearchParams(window.location.search);
+  const upgraded=params.get('upgraded');
+  if(upgraded&&user){plan='recovery';history.replaceState(null,'',window.location.pathname);}
+});
+</script>
+</body>
+</html>
